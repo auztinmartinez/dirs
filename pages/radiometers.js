@@ -1,16 +1,20 @@
 import Link from "next/link"
+import RadiometerCard from "../components/radiometerCard"
 
 export default function Radiometers(props) {
   return (
     <>
       <h2>Radiometers</h2>
-      {props.posts.map((post, index) => {
+      <RadiometerCard />
+      {props.radiometers.map((radiometer, index) => {
         return (
           <div key={index}>
             <h3>
-              <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+              <Link href={`/radiometers/${radiometer.id}`}>{radiometer.name}</Link>
             </h3>
-            <p>{post.content}</p>
+            <p>ID: {radiometer.id}</p>
+            <p>{radiometer.location}</p>
+            <p>{radiometer.coordinates}</p>
             <hr />
           </div>
         )
@@ -20,12 +24,12 @@ export default function Radiometers(props) {
 }
 
 export async function getStaticProps() {
-  const response = await fetch("https://learnwebcode.github.io/json-example/posts.json")
+  const response = await fetch("http://52.204.169.92:3000/getRadiometerInfo")
   const data = await response.json()
 
   return {
     props: {
-      posts: data.posts
+        radiometers: data.radiometers
     }
   }
 }

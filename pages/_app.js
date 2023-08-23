@@ -1,29 +1,20 @@
 import "../styles/global.css"
-import Link from 'next/link'
-import {useRouter} from 'next/router'
+import Layout from "../components/layout.js"
+import Head from "next/head"
+import {NextUIProvider} from "@nextui-org/react";
+import '../dist/output.css'
 
-export default function App({Component, pageProps}) {
-    const router = useRouter()
-    
-    return (
-        <>
-        <div>
-            <h1>DIRS Radiometer Project</h1>
-            <nav className="header-nav">
-                <ul>
-                    <li>
-                        <Link className={router.pathname == "/" ? "active" : ""} href="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link className={router.pathname == "/radiometers" ? "active" : ""} href="/radiometers">Radiometers</Link>
-                    </li>
-                    <li>
-                        <Link className={router.pathname == "/about" ? "active" : ""} href="/about">About</Link>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        <Component {...pageProps}/>
-        </>
-    )
+export default function AppWrapper({ Component, pageProps }) {
+  return (
+    <>
+    <NextUIProvider>
+      <Head>
+        <title>{pageProps.title ? pageProps.title : "DIRS Radiometer Project"}</title>
+      </Head>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </NextUIProvider>
+    </>
+  )
 }

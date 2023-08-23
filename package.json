@@ -13,8 +13,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@nextui-org/react": "^2.1.5",
+    "framer-motion": "^10.16.1",
     "next": "^13.4.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.3"
   }
 }
