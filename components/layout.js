@@ -7,7 +7,9 @@ export default function Layout({ children }) {
   return (
     <>
       <div>
-        <h1>DIRS Radiometer Project</h1>
+        <h1>
+          <Link href="/">DIRS Radiometer Project</Link>
+        </h1>
         <nav className="header-nav">
           <ul>
             <li>

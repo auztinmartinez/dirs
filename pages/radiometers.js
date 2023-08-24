@@ -1,24 +1,21 @@
 import Link from "next/link"
 import RadiometerCard from "../components/radiometerCard"
+import ExpandedRadiometerCard from "../components/expandedRadiometerCard"
 
+// card implementation for radiometer list
 export default function Radiometers(props) {
   return (
     <>
-      <h2>Radiometers</h2>
-      <RadiometerCard />
-      {props.radiometers.map((radiometer, index) => {
-        return (
-          <div key={index}>
-            <h3>
-              <Link href={`/radiometers/${radiometer.id}`}>{radiometer.name}</Link>
-            </h3>
-            <p>ID: {radiometer.id}</p>
-            <p>{radiometer.location}</p>
-            <p>{radiometer.coordinates}</p>
-            <hr />
-          </div>
-        )
-      })}
+      <div className="flex gap-4 py-4">
+        <div className="flex flex-col gap-2 ">
+          {props.radiometers.map((radiometer, index) => (
+            <RadiometerCard key={index} rad={(radiometer)} className="flex flex-col"/>
+          ))}
+        </div>
+        <div className="flex flex-row">
+          <ExpandedRadiometerCard rad={props.radiometers[0]}/>
+        </div>
+      </div>
     </>
   )
 }

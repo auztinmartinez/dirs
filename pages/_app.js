@@ -7,7 +7,7 @@ import '../dist/output.css'
 export default function AppWrapper({ Component, pageProps }) {
   return (
     <>
-    <NextUIProvider>
+    <NextUIProvider disableBaseline="true">
       <Head>
         <title>{pageProps.title ? pageProps.title : "DIRS Radiometer Project"}</title>
       </Head>
