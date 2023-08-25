@@ -19,12 +19,14 @@ export default function ExpandedRadiometerCard({rad}) {
       </CardHeader>
       <Divider/>
       <CardBody>
-        <p className="font-bold">Most Recent Data Upload</p>
-        <p>insert day of the week, date, timezone time, and UTC time</p>
-        <h4>Most Recent System Reset</h4>
-        <p>insert day of the week, date, timezone time, and UTC time</p>
+        <h4 className="font-bold">Most Recent Data Upload</h4>
+        <p>{rad.lastupload}</p>
+        <h4 className="font-bold">Most Recent System Reset</h4>
+        <p>{rad.lastreset}</p>
         <h4>Board Errors</h4>
-        <p>insert list of current board errors, or "none"</p>
+        {/* {rad.errors.map((error, index) => (
+            <p key={index} className="flex flex-col">{error}</p>
+        ))} */}
         <h4>Board Logs</h4>
         <p>insert scrollable logs</p>
       </CardBody>
