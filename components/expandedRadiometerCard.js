@@ -1,7 +1,11 @@
 import React from "react";
 import {Card, CardHeader, CardBody, Divider, Button} from "@nextui-org/react";
+import { useRouter } from "next/router"
 
 export default function ExpandedRadiometerCard({rad}) {
+
+  const router = useRouter()
+
   return (
     <Card style={{width: '40rem'}} className="bg-slate-200 border-slate-500 border-2">
       <CardHeader className="justify-between">
@@ -13,7 +17,7 @@ export default function ExpandedRadiometerCard({rad}) {
                 <p className="text-default-500 text-tiny">{rad.coordinates}</p>
             </div>
         </div>
-        <Button onPress={() => console.log("viewing data")} color="primary" radius="lg" size="lg">
+        <Button onPress={() => router.push("/radiometers/" + rad.id)} color="primary" radius="lg" size="lg">
             View Data
         </Button>
       </CardHeader>
@@ -24,9 +28,9 @@ export default function ExpandedRadiometerCard({rad}) {
         <h4 className="font-bold">Most Recent System Reset</h4>
         <p>{rad.lastreset}</p>
         <h4>Board Errors</h4>
-        {/* {rad.errors.map((error, index) => (
+        {rad.errors.map((error, index) => (
             <p key={index} className="flex flex-col">{error}</p>
-        ))} */}
+        ))}
         <h4>Board Logs</h4>
         <p>insert scrollable logs</p>
       </CardBody>
