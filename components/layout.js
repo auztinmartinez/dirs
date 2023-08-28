@@ -8,7 +8,7 @@ export default function Layout({ children }) {
     <>
       <div>
         <h1>
-          <Link href="/">DIRS Radiometer Project</Link>
+          <Link href="/" className="font-bold">DIRS Radiometer Project</Link>
         </h1>
         <nav className="header-nav">
           <ul>

@@ -7,10 +7,10 @@ export default function ExpandedRadiometerCard({rad}) {
   const router = useRouter()
 
   return (
-    <Card style={{width: '40rem'}} className="bg-slate-200 border-slate-500 border-2">
-      <CardHeader className="justify-between">
+    <Card style={{width: '40rem'}} radius="lg" className="bg-slate-50 border-slate-300 border-2">
+      <CardHeader radius="none" className="justify-between bg-slate-200">
         <div>
-            <h1 className="text-large uppercase font-bold">{rad.name}</h1>
+            <h1 className="text-large font-bold">{rad.name}</h1>
             <p className="text-default-500 text-tiny">ID: {rad.id}</p>
             <div>
                 <p className="text-default-500 text-tiny">{rad.location}</p>
@@ -27,11 +27,11 @@ export default function ExpandedRadiometerCard({rad}) {
         <p>{rad.lastupload}</p>
         <h4 className="font-bold">Most Recent System Reset</h4>
         <p>{rad.lastreset}</p>
-        <h4>Board Errors</h4>
+        <h4 className="font-bold">Board Errors</h4>
         {rad.errors.map((error, index) => (
             <p key={index} className="flex flex-col">{error}</p>
         ))}
-        <h4>Board Logs</h4>
+        <h4 className="font-bold">Board Logs</h4>
         <p>insert scrollable logs</p>
       </CardBody>
     </Card>

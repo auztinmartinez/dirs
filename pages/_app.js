@@ -1,4 +1,4 @@
-import "../styles/global.css"
+// import "../styles/global.css"
 import Layout from "../components/layout.js"
 import Head from "next/head"
 import {NextUIProvider} from "@nextui-org/react";
