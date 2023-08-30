@@ -24,9 +24,9 @@ export default function ExpandedRadiometerCard({rad}) {
       <Divider/>
       <CardBody>
         <h4 className="font-bold">Most Recent Data Upload</h4>
-        <p>{rad.lastupload}</p>
+        <p>{rad.lastupload} UTC</p>
         <h4 className="font-bold">Most Recent System Reset</h4>
-        <p>{rad.lastreset}</p>
+        <p>{rad.lastreset} UTC</p>
         <h4 className="font-bold">Board Errors</h4>
         {rad.errors.map((error, index) => (
             <p key={index} className="flex flex-col">{error}</p>
