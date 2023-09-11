@@ -129,91 +129,91 @@ export default function Data(props) {
         </div>
         <Button onPress={onOpen} color="primary">Export</Button>
         <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center"  radius="lg" size="lg" className="px-9">
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">Export Data</ModalHeader>
-              <ModalBody>
-                <p>Start date</p>
-                <div className="flex flex-rows">
-                  <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                    <Select label="Month" placeholder="Select a month" className="max-w-xs">
-                      {months.map((month) => (
-                        <SelectItem key={month.abbreviation} value={month.abbreviation}>
-                          {month.name}
-                        </SelectItem>
-                      ))}
-                    </Select>
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className="flex flex-col gap-1">Export Data</ModalHeader>
+                <ModalBody>
+                  <p>Start date</p>
+                  <div className="flex flex-rows">
+                    <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+                      <Select label="Month" placeholder="Select a month" className="max-w-xs">
+                        {months.map((month) => (
+                          <SelectItem key={month.abbreviation} value={month.abbreviation}>
+                            {month.name}
+                          </SelectItem>
+                        ))}
+                      </Select>
+                    </div>
+                    <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+                      <Select label="Day" placeholder="Select a day" className="max-w-xs">
+                        {days.map((day) => (
+                          <SelectItem key={day} value={day}>
+                            {day.toString()}
+                          </SelectItem>
+                        ))}
+                      </Select>
+                    </div>
+                    <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+                      <Select label="Year" placeholder="Select a year" className="max-w-xs">
+                        {years.map((year) => (
+                          <SelectItem key={year} value={year}>
+                            {year.toString()}
+                          </SelectItem>
+                        ))}
+                      </Select>
+                    </div>
                   </div>
-                  <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                    <Select label="Day" placeholder="Select a day" className="max-w-xs">
-                      {days.map((day) => (
-                        <SelectItem key={day} value={day}>
-                          {day.toString()}
-                        </SelectItem>
-                      ))}
-                    </Select>
-                  </div>
-                  <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                    <Select label="Year" placeholder="Select a year" className="max-w-xs">
-                      {years.map((year) => (
-                        <SelectItem key={year} value={year}>
-                          {year.toString()}
-                        </SelectItem>
-                      ))}
-                    </Select>
-                  </div>
-                </div>
 
-                <p>End date</p>
-                <div className="flex flex-rows">
-                  <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                    <Select label="Month" placeholder="Select a month" className="max-w-xs">
-                      {months.map((month) => (
-                        <SelectItem key={month.abbreviation} value={month.abbreviation}>
-                          {month.name}
-                        </SelectItem>
-                      ))}
-                    </Select>
+                  <p>End date</p>
+                  <div className="flex flex-rows">
+                    <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+                      <Select label="Month" placeholder="Select a month" className="max-w-xs">
+                        {months.map((month) => (
+                          <SelectItem key={month.abbreviation} value={month.abbreviation}>
+                            {month.name}
+                          </SelectItem>
+                        ))}
+                      </Select>
+                    </div>
+                    <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+                      <Select label="Day" placeholder="Select a day" className="max-w-xs">
+                        {days.map((day) => (
+                          <SelectItem key={day} value={day}>
+                            {day.toString()}
+                          </SelectItem>
+                        ))}
+                      </Select>
+                    </div>
+                    <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+                      <Select label="Year" placeholder="Select a year" className="max-w-xs">
+                        {years.map((year) => (
+                          <SelectItem key={year} value={year}>
+                            {year.toString()}
+                          </SelectItem>
+                        ))}
+                      </Select>
+                    </div>
                   </div>
-                  <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                    <Select label="Day" placeholder="Select a day" className="max-w-xs">
-                      {days.map((day) => (
-                        <SelectItem key={day} value={day}>
-                          {day.toString()}
-                        </SelectItem>
-                      ))}
-                    </Select>
-                  </div>
-                  <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                    <Select label="Year" placeholder="Select a year" className="max-w-xs">
-                      {years.map((year) => (
-                        <SelectItem key={year} value={year}>
-                          {year.toString()}
-                        </SelectItem>
-                      ))}
-                    </Select>
-                  </div>
-                </div>
 
-                <div className="flex py-2 px-1 justify-between">
-                  <RadioGroup label="Select your favorite city" orientation="vertical">
-                    <Radio value="single">Single combined CSV file</Radio>
-                    <Radio value="multiple">Individual day CSV files (ZIP)</Radio>
-                  </RadioGroup>
-                </div>
-              </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="flat" onPress={onClose}>
-                  Close
-                </Button>
-                <Button color="primary" onPress={onClose}>
-                  Export
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
+                  <div className="flex py-2 px-1 justify-between">
+                    <RadioGroup label="Select your favorite city" orientation="vertical">
+                      <Radio value="single">Single combined CSV file</Radio>
+                      <Radio value="multiple">Individual day CSV files (ZIP)</Radio>
+                    </RadioGroup>
+                  </div>
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="danger" variant="flat" onPress={onClose}>
+                    Close
+                  </Button>
+                  <Button color="primary" onPress={onClose}>
+                    Export
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
         </Modal>
       </CardHeader>
       <Divider/>
