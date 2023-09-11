@@ -350,14 +350,6 @@ const handleExportData = async (startDate, endDate, onClose) => {
   console.log(endDate.day);
   console.log(endDate.year);
 
-  // reset the start and end dates 
-  startDate.month = ''
-  startDate.day = ''
-  startDate.year = ''
-  endDate.month = ''
-  endDate.day = ''
-  endDate.year = ''
-
 
   // request data with the selected start and end dates
   // const response = await fetch('/your-api-endpoint?startDate=${startDate.month}&endDate=${endDate.month}');
@@ -366,6 +358,14 @@ const handleExportData = async (startDate, endDate, onClose) => {
   // process the retrieved data or trigger the export process
   // 
 
+  // reset the start and end dates 
+  startDate.month = ''
+  startDate.day = ''
+  startDate.year = ''
+  endDate.month = ''
+  endDate.day = ''
+  endDate.year = ''
+  
   // close the modal after exporting
   onClose();
 };
