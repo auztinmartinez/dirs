@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link"
 import { useRouter } from "next/router"
 import {Tabs, Tab, Card, CardHeader, CardBody, Button, Divider, Input,
@@ -109,6 +110,11 @@ export default function Data(props) {
 
   const router = useRouter()
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  // function to know what radio option is selected
+  const [selected, setSelected] = React.useState("single");
+  // functions for holding the start and end date selections
+  const [startDate, setStartDate] = React.useState({ month: '', day: '', year: '' });
+  const [endDate, setEndDate] = React.useState({ month: '', day: '', year: '' });
   return (
     <>
       <p>
@@ -137,16 +143,32 @@ export default function Data(props) {
                   <p>Start date</p>
                   <div className="flex flex-rows">
                     <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                      <Select label="Month" placeholder="Select a month" className="max-w-xs">
+                      <Select 
+                        label="Month" 
+                        placeholder="Select a month" 
+                        className="max-w-xs"
+                        onChange={(event) => {
+                          const selectedMonth = event.target.value;
+                          setStartDate({ ...startDate, month: selectedMonth });
+                        }}
+                      >
                         {months.map((month) => (
-                          <SelectItem key={month.abbreviation} value={month.abbreviation}>
+                          <SelectItem key={month.short} value={month.short}>
                             {month.name}
                           </SelectItem>
                         ))}
                       </Select>
                     </div>
                     <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                      <Select label="Day" placeholder="Select a day" className="max-w-xs">
+                      <Select 
+                        label="Day" 
+                        placeholder="Select a day" 
+                        className="max-w-xs"
+                        onChange={(event) => {
+                          const selectedDay = event.target.value;
+                          setStartDate({ ...startDate, day: selectedDay });
+                        }}
+                      >
                         {days.map((day) => (
                           <SelectItem key={day} value={day}>
                             {day.toString()}
@@ -155,7 +177,15 @@ export default function Data(props) {
                       </Select>
                     </div>
                     <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                      <Select label="Year" placeholder="Select a year" className="max-w-xs">
+                      <Select 
+                        label="Year" 
+                        placeholder="Select a year" 
+                        className="max-w-xs"
+                        onChange={(event) => {
+                          const selectedYear = event.target.value;
+                          setStartDate({ ...startDate, year: selectedYear });
+                        }}
+                      >
                         {years.map((year) => (
                           <SelectItem key={year} value={year}>
                             {year.toString()}
@@ -168,16 +198,32 @@ export default function Data(props) {
                   <p>End date</p>
                   <div className="flex flex-rows">
                     <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                      <Select label="Month" placeholder="Select a month" className="max-w-xs">
+                      <Select 
+                        label="Month" 
+                        placeholder="Select a month" 
+                        className="max-w-xs"
+                        onChange={(event) => {
+                          const selectedMonth = event.target.value;
+                          setEndDate({ ...endDate, month: selectedMonth });
+                        }}
+                      >
                         {months.map((month) => (
-                          <SelectItem key={month.abbreviation} value={month.abbreviation}>
+                          <SelectItem key={month.short} value={month.short}>
                             {month.name}
                           </SelectItem>
                         ))}
                       </Select>
                     </div>
                     <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                      <Select label="Day" placeholder="Select a day" className="max-w-xs">
+                      <Select 
+                        label="Day" 
+                        placeholder="Select a day" 
+                        className="max-w-xs"
+                        onChange={(event) => {
+                          const selectedDay = event.target.value;
+                          setEndDate({ ...endDate, day: selectedDay });
+                        }}
+                      >
                         {days.map((day) => (
                           <SelectItem key={day} value={day}>
                             {day.toString()}
@@ -186,7 +232,15 @@ export default function Data(props) {
                       </Select>
                     </div>
                     <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                      <Select label="Year" placeholder="Select a year" className="max-w-xs">
+                      <Select 
+                        label="Year" 
+                        placeholder="Select a year" 
+                        className="max-w-xs"
+                        onChange={(event) => {
+                          const selectedYear = event.target.value;
+                          setEndDate({ ...endDate, year: selectedYear });
+                        }}
+                      >
                         {years.map((year) => (
                           <SelectItem key={year} value={year}>
                             {year.toString()}
@@ -197,17 +251,24 @@ export default function Data(props) {
                   </div>
 
                   <div className="flex py-2 px-1 justify-between">
-                    <RadioGroup label="Select your favorite city" orientation="vertical">
+                    <RadioGroup 
+                      label="Export format" 
+                      orientation="vertical" 
+                      defaultValue="single"
+                      value={selected}
+                      onValueChange={setSelected}
+                    >
                       <Radio value="single">Single combined CSV file</Radio>
                       <Radio value="multiple">Individual day CSV files (ZIP)</Radio>
                     </RadioGroup>
+                    <p className="text-default-500 text-small">Selected: {selected}</p> 
                   </div>
                 </ModalBody>
                 <ModalFooter>
                   <Button color="danger" variant="flat" onPress={onClose}>
                     Close
                   </Button>
-                  <Button color="primary" onPress={onClose}>
+                  <Button color="primary" onPress={() => handleExportData(startDate, endDate, onClose)}>
                     Export
                   </Button>
                 </ModalFooter>
@@ -278,3 +339,33 @@ export async function getStaticProps(context) {
     }
   }
 }
+
+const handleExportData = async (startDate, endDate, onClose) => {
+  console.log("Start")
+  console.log(startDate.month);
+  console.log(startDate.day);
+  console.log(startDate.year);
+  console.log("End")
+  console.log(endDate.month);
+  console.log(endDate.day);
+  console.log(endDate.year);
+
+  // reset the start and end dates 
+  startDate.month = ''
+  startDate.day = ''
+  startDate.year = ''
+  endDate.month = ''
+  endDate.day = ''
+  endDate.year = ''
+
+
+  // request data with the selected start and end dates
+  // const response = await fetch('/your-api-endpoint?startDate=${startDate.month}&endDate=${endDate.month}');
+  // const data = await response.json();
+
+  // process the retrieved data or trigger the export process
+  // 
+
+  // close the modal after exporting
+  onClose();
+};
