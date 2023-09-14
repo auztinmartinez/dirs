@@ -16,6 +16,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { months } from '../../components/datetimeDetails'
+import { start } from "repl";
 
 ChartJS.register(
   CategoryScale,
@@ -153,7 +154,7 @@ export default function Data(props) {
                         }}
                       >
                         {months.map((month) => (
-                          <SelectItem key={month.short} value={month.short}>
+                          <SelectItem key={month.number} value={month.number}>
                             {month.name}
                           </SelectItem>
                         ))}
@@ -208,7 +209,7 @@ export default function Data(props) {
                         }}
                       >
                         {months.map((month) => (
-                          <SelectItem key={month.short} value={month.short}>
+                          <SelectItem key={month.number} value={month.number}>
                             {month.name}
                           </SelectItem>
                         ))}
@@ -268,7 +269,7 @@ export default function Data(props) {
                   <Button color="danger" variant="flat" onPress={onClose}>
                     Close
                   </Button>
-                  <Button color="primary" onPress={() => handleExportData(startDate, endDate, onClose)}>
+                  <Button color="primary" onPress={() => handleExportData(startDate, endDate, props.radiometer.id, onClose)}>
                     Export
                   </Button>
                 </ModalFooter>
@@ -297,7 +298,7 @@ export default function Data(props) {
       <Divider/>
       <CardBody>
         <h1 className="text-large font-bold">Evironmental Sensor Data</h1>
-        <p>{props.serialNum}</p>
+        {/* <p>{props.serialNum}</p> */}
         {/* <Line options={options} data={props.data} />; */}
       </CardBody>
     </Card>
@@ -328,19 +329,20 @@ export async function getStaticProps(context) {
   const info = await response1.json()
   const theRadiometer = info.radiometers.filter(radiometer => radiometer.id === context.params.id)[0]
   // get the radiometer data
-  const response2 = await fetch("http://52.204.169.92:3000/getRadiometerData/" + theRadiometer.id)
-  const data = await response2.json()
+  // const response2 = await fetch("http://52.204.169.92:3000/getRadiometerData/" + theRadiometer.id)
+  // const data = await response2.json()
 
   return {
     props: {
       radiometer: theRadiometer,
       name: theRadiometer.name,
-      serialNum: data.commsSerial
+      // serialNum: data.commsSerial
     }
   }
 }
 
-const handleExportData = async (startDate, endDate, onClose) => {
+
+const handleExportData = async (startDate, endDate, radiometerID, onClose) => {
   console.log("Start")
   console.log(startDate.month);
   console.log(startDate.day);
@@ -350,10 +352,24 @@ const handleExportData = async (startDate, endDate, onClose) => {
   console.log(endDate.day);
   console.log(endDate.year);
 
+  console.log(startDate)
+  console.log(endDate)
+
 
   // request data with the selected start and end dates
-  // const response = await fetch('/your-api-endpoint?startDate=${startDate.month}&endDate=${endDate.month}');
-  // const data = await response.json();
+  // const url = ("http://52.204.169.92:3000/getRadiometerData/" + radiometerID +
+  //   new URLSearchParams({ startMonth: startDate.month, startDay: startDate.day, startYear: startDate.year,
+  //                         endMonth: endDate.month, endDay: endDate.day, endYear: endDate.year }).toString() );
+    const url = "http://52.204.169.92:3000/getRadiometerData/" + radiometerID + 
+                "?startMonth=" + startDate.month +
+                "&startDay=" + startDate.day +
+                "&startYear=" + startDate.year +
+                "&endMonth=" + endDate.month +
+                "&endDay=" + endDate.day +
+                "&endYear=" + endDate.year ;
+  // const response = await fetch("http://52.204.169.92:3000/getRadiometerData/" + radiometerID + "?startDate=${startDate.month}&endDate=${endDate.month}");
+  const response = await fetch(url);
+  const data = await response.json();
 
   // process the retrieved data or trigger the export process
   // 
